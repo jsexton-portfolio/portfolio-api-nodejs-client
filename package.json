@@ -19,7 +19,7 @@
     "dist"
   ],
   "author": "Justin Sexton",
-  "license": "ISC",
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/jsexton-portfolio/portfolio-api-nodejs-client.git"
