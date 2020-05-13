@@ -7,7 +7,8 @@
   "scripts": {
     "build": "tsc",
     "test": "jest",
-    "coverage": "jest --coverage"
+    "coverage": "jest --coverage",
+    "prepublish": "npm run build"
   },
   "keywords": [
     "typescript",
@@ -19,7 +20,6 @@
   ],
   "author": "Justin Sexton",
   "license": "ISC",
-  "prepublish": "tsc",
   "devDependencies": {
     "@types/jest": "^25.2.1",
     "@typescript-eslint/eslint-plugin": "^2.32.0",
