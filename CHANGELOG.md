@@ -1,3 +1,3 @@
-# 0.1.0
+# 0.1.1
 
-- Added API for interfacing with contact message service.
+- Added API for creating new portfolio contact messages.
