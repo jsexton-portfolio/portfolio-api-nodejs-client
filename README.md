@@ -2,6 +2,12 @@
 
 NodeJS client used to interface with Portfolio APIs.
 
+## Installation
+
+`npm i @jsextonn/portfolio-api-client`
+
+Note: Version `0.1.1` is not distributed with minified version.
+
 ## Usage
 
 ### Contact Message Creation
