@@ -1,0 +1,38 @@
+{
+  "name": "@jsextonn/portfolio-api-client",
+  "version": "0.1.1",
+  "description": "NodeJS client for portfolio API",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "test": "jest",
+    "coverage": "jest --coverage"
+  },
+  "keywords": [
+    "typescript",
+    "portfolio",
+    "api client"
+  ],
+  "files": [
+    "dist"
+  ],
+  "author": "Justin Sexton",
+  "license": "ISC",
+  "prepublish": "tsc",
+  "devDependencies": {
+    "@types/jest": "^25.2.1",
+    "@typescript-eslint/eslint-plugin": "^2.32.0",
+    "@typescript-eslint/parser": "^2.32.0",
+    "eslint": "^7.0.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-prettier": "^3.1.3",
+    "jest": "^25.5.4",
+    "prettier": "^2.0.5",
+    "ts-jest": "^25.5.1",
+    "typescript": "^3.8.3"
+  },
+  "dependencies": {
+    "axios": "^0.19.2"
+  }
+}
