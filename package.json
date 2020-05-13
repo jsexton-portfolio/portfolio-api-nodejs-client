@@ -8,7 +8,7 @@
     "build": "tsc",
     "test": "jest",
     "coverage": "jest --coverage",
-    "prepublish": "npm run build"
+    "prepare": "npm run build"
   },
   "keywords": [
     "typescript",
@@ -20,6 +20,10 @@
   ],
   "author": "Justin Sexton",
   "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jsexton-portfolio/portfolio-api-nodejs-client"
+  },
   "devDependencies": {
     "@types/jest": "^25.2.1",
     "@typescript-eslint/eslint-plugin": "^2.32.0",
