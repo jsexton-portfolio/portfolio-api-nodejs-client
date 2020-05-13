@@ -1,5 +1,7 @@
 # Portfolio API NodeJS Client
 
+![](https://github.com/jsexton-portfolio/portfolio-api-nodejs-client/workflows/build/badge.svg)
+
 NodeJS client used to interface with Portfolio APIs.
 
 ## Installation
