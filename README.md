@@ -19,7 +19,7 @@ import {
   contact,
   Reason,
   CreateContactMessageRequest,
-} from "portfolio-api-client";
+} from "@jsextonn/portfolio-api-client";
 
 const client = contact();
 
