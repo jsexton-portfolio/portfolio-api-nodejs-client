@@ -2,7 +2,7 @@ import { ClientConfig } from "../../common/config";
 import { ContactClient } from "./client";
 
 const defaultConfig: ClientConfig = {
-  host: "https://b623pa888e.execute-api.us-east-2.amazonaws.com/api/",
+  host: "https://b623pa888e.execute-api.us-east-2.amazonaws.com/api",
 };
 
 /**
