@@ -8,7 +8,7 @@ NodeJS client used to interface with Portfolio APIs.
 
 `npm i @jsextonn/portfolio-api-client`
 
-Note: Version `0.1.x` is not distributed with minified version.
+Note: Package is currently not distributed with minified version.
 
 ## Usage
 
@@ -16,12 +16,12 @@ Note: Version `0.1.x` is not distributed with minified version.
 
 ```ts
 import {
-  contact,
+  portfolio,
   Reason,
   CreateContactMessageRequest,
 } from "@jsextonn/portfolio-api-client";
 
-const client = contact();
+const client = portfolio();
 
 const request: CreateContactMessageRequest = {
   body: {
@@ -36,11 +36,63 @@ const request: CreateContactMessageRequest = {
 };
 
 // The response entity returned from the web service
-const response = await client.messages.create(request);
+const response = await client.contact.createMessage(request);
 
 // The response body
 const responseBody = response.data;
 
-// The newly created message
+// The newly created message, if successful
+const message = responseBody.data;
+```
+
+### Login
+
+```ts
+import { portfolio, LoginRequest } from "@jsextonn/portfolio-api-client";
+
+const client = portfolio();
+
+const request: LoginRequest = {
+  body: {
+    username: "username",
+    password: "password",
+  },
+};
+
+// The response entity returned from the web service
+const response = await client.security.login(request);
+
+// The response body
+const responseBody = response.data;
+
+// The authentication tokens, if successful
+const message = responseBody.data;
+```
+
+### Confirm Account
+
+```ts
+import {
+  portfolio,
+  UpdatePasswordRequest,
+} from "@jsextonn/portfolio-api-client";
+
+const client = portfolio();
+
+const request: UpdatePasswordRequest = {
+  body: {
+    username: "username",
+    oldPassword: "oldPassword",
+    newPassword: "newPassword",
+  },
+};
+
+// The response entity returned from the web service
+const response = await client.security.confirmAccount(request);
+
+// The response body
+const responseBody = response.data;
+
+// The authentication tokens, if successful
 const message = responseBody.data;
 ```
