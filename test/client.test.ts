@@ -1,38 +1,42 @@
-import { contact, ContactClient } from "../src";
+import { portfolio, PortfolioClient } from "../src";
 
-describe("contact client factory function", () => {
-  it("should return contact client", () => {
-    const client = contact();
+describe("portfolio client factory function", () => {
+  it("should return portfolio client", () => {
+    const client = portfolio();
     expect(client);
   });
 
   it("should correctly configure client defaults", () => {
     const expectedHost =
       "https://b623pa888e.execute-api.us-east-2.amazonaws.com/api";
-    const client = contact();
+    const client = portfolio();
     expect(client.config.host).toBe(expectedHost);
   });
 
   it("should correctly configure client", () => {
     const expectedHost = "123";
-    const client = contact({ host: expectedHost });
+    const client = portfolio({ host: expectedHost });
     expect(client.config.host).toBe(expectedHost);
   });
 });
 
-describe("contact client", () => {
+describe("portfolio client", () => {
   const config = {
     host: "123",
   };
 
-  let client: ContactClient;
+  let client: PortfolioClient;
 
   beforeAll(() => {
-    client = new ContactClient(config);
+    client = new PortfolioClient(config);
   });
 
-  it("should have contact message service", () => {
-    expect(client.messages);
+  it("should have contact client", () => {
+    expect(client.contact);
+  });
+
+  it("should have security client", () => {
+    expect(client.security);
   });
 
   it("should have expected config", () => {

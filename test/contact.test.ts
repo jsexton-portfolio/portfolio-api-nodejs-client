@@ -1,9 +1,5 @@
 import axios, { AxiosResponse } from "axios";
-import {
-  ContactMessageService,
-  CreateContactMessageRequest,
-  Reason,
-} from "../src";
+import { ContactClient, CreateContactMessageRequest, Reason } from "../src";
 
 jest.mock("axios");
 
@@ -24,9 +20,8 @@ describe("message service", () => {
     headers: {},
   };
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let axiosMock: any;
-  let service: ContactMessageService;
+  let client: ContactClient;
 
   beforeAll(() => {
     axiosMock = axios as jest.Mocked<typeof axios>;
@@ -34,14 +29,14 @@ describe("message service", () => {
       return axiosResponse;
     });
 
-    service = new ContactMessageService(config, axiosMock);
+    client = new ContactClient(config, axiosMock);
   });
 
   it("should have expected config", () => {
-    expect(service.config).toBe(config);
+    expect(client.config).toBe(config);
   });
 
-  it("should successfuly create new contact message", async () => {
+  it("should successfully create new contact message", async () => {
     const request: CreateContactMessageRequest = {
       body: {
         message:
@@ -55,7 +50,7 @@ describe("message service", () => {
       },
     };
 
-    const response = await service.create(request);
+    const response = await client.createMessage(request);
 
     expect(response).toEqual(axiosResponse);
     expect(axiosMock.post).toHaveBeenCalledTimes(1);

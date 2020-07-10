@@ -1,2 +1,2 @@
-export * from "./apis/contact";
+export * from "./apis";
 export * from "./common";
