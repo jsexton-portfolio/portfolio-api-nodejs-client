@@ -3,7 +3,7 @@ import { ContactClient } from "./contact/client";
 import { SecurityClient } from "./security/client";
 
 const defaultConfig: ClientConfig = {
-  host: "https://b623pa888e.execute-api.us-east-2.amazonaws.com/api",
+  host: "https://api.justinsexton.net",
 };
 
 export class PortfolioClient {

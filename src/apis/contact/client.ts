@@ -29,7 +29,7 @@ export class ContactClient extends BaseClient {
   createMessage(
     request: CreateContactMessageRequest
   ): Promise<AxiosResponse<ContactMessageResponse>> {
-    const url = `${this.config.host}/mail`;
+    const url = `${this.config.host}/contact/mail`;
     const config = axiosRequestConfig(request);
 
     return this.axiosInstance.post<ContactMessageResponse>(

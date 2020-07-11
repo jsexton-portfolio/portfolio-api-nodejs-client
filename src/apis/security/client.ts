@@ -26,7 +26,7 @@ export class SecurityClient extends BaseClient {
   }
 
   login(request: LoginRequest): Promise<AxiosResponse<LoginResponse>> {
-    const url = `${this.config.host}/login`;
+    const url = `${this.config.host}/security/login`;
     const config = axiosRequestConfig(request);
 
     return this.axiosInstance.post<LoginResponse>(url, request.body, config);
@@ -35,7 +35,7 @@ export class SecurityClient extends BaseClient {
   confirmAccount(
     request: UpdatePasswordRequest
   ): Promise<AxiosResponse<LoginResponse>> {
-    const url = `${this.config.host}/confirm-account`;
+    const url = `${this.config.host}/security/confirm-account`;
     const config = axiosRequestConfig(request);
 
     return this.axiosInstance.post<LoginResponse>(url, request.body, config);
