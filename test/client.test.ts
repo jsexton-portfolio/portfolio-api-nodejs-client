@@ -7,8 +7,7 @@ describe("portfolio client factory function", () => {
   });
 
   it("should correctly configure client defaults", () => {
-    const expectedHost =
-      "https://b623pa888e.execute-api.us-east-2.amazonaws.com/api";
+    const expectedHost = "https://api.justinsexton.net";
     const client = portfolio();
     expect(client.config.host).toBe(expectedHost);
   });
