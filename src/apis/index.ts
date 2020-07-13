@@ -2,10 +2,6 @@ import { ClientConfig } from "../common/client";
 import { ContactClient } from "./contact/client";
 import { SecurityClient } from "./security/client";
 
-const defaultConfig: ClientConfig = {
-  host: "https://api.justinsexton.net",
-};
-
 export class PortfolioClient {
   readonly config: ClientConfig;
   readonly contact: ContactClient;
@@ -18,13 +14,25 @@ export class PortfolioClient {
   }
 }
 
+const defaultConfig = { host: "https://api.justinsexton.net" };
+
+const mergeConfigs = (
+  configOne: ClientConfig,
+  configTwo: ClientConfig
+): ClientConfig => {
+  return {
+    ...configTwo,
+    ...configOne,
+  };
+};
+
 /**
  * Factory method used for configuring and building a new contact client.
  */
-export const portfolio = (
-  config: ClientConfig = defaultConfig
-): PortfolioClient => {
-  return new PortfolioClient(config);
+export const portfolio = (config?: ClientConfig): PortfolioClient => {
+  const resolvedConfig =
+    config !== undefined ? mergeConfigs(config, defaultConfig) : defaultConfig;
+  return new PortfolioClient(resolvedConfig);
 };
 
 export * from "./contact/client";

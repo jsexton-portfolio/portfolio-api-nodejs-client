@@ -1,28 +1,21 @@
-import { AxiosRequestConfig } from "axios";
-
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export interface PortfolioRequest<T = any> {
-  version?: string;
-  body?: T;
+/**
+ * Represents a portfolio request.
+ * JWT and Version properties can be used to override initial portfolio client configuration,
+ * however currently this functionality does not exist
+ */
+export interface PortfolioRequest {
   jwt?: string;
+  version?: string;
 }
 
-export const axiosRequestConfig = <T>(
-  request: PortfolioRequest<T>
-): AxiosRequestConfig => {
-  const headers: { [k: string]: string } = {};
+export interface RequestWithParameters<T> extends PortfolioRequest {
+  queryParameters?: T;
+}
 
-  if (request.jwt) {
-    headers["Authorization"] = `Bearer ${request.jwt}`;
-  }
+export interface RequestWithBody<T> extends PortfolioRequest {
+  body?: T;
+}
 
-  if (request.version) {
-    headers["X-PORTFOLIO-VERSION"] = request.version;
-  }
-
-  return {
-    headers: {
-      ...headers,
-    },
-  };
-};
+export interface CompletePortfolioRequest<B, Q>
+  extends RequestWithBody<B>,
+    RequestWithParameters<Q> {}

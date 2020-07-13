@@ -1,9 +1,9 @@
 import axios, { AxiosInstance, AxiosResponse } from "axios";
 import { BaseClient, ClientConfig, PortfolioResponse } from "../../common";
-import { axiosRequestConfig, PortfolioRequest } from "../../common/request";
+import { PortfolioRequest, RequestWithBody } from "../../common/request";
 import { TokenBody } from "./models";
 
-export type LoginRequest = PortfolioRequest<LoginForm>;
+export type LoginRequest = RequestWithBody<LoginForm>;
 
 export interface LoginForm {
   username: string;
@@ -12,7 +12,7 @@ export interface LoginForm {
 
 export type LoginResponse = PortfolioResponse<TokenBody>;
 
-export type UpdatePasswordRequest = PortfolioRequest<UpdatePasswordForm>;
+export type UpdatePasswordRequest = RequestWithBody<UpdatePasswordForm>;
 
 export interface UpdatePasswordForm {
   username: string;
@@ -26,18 +26,22 @@ export class SecurityClient extends BaseClient {
   }
 
   login(request: LoginRequest): Promise<AxiosResponse<LoginResponse>> {
-    const url = `${this.config.host}/security/login`;
-    const config = axiosRequestConfig(request);
+    const config = this.config.merge(request as PortfolioRequest);
+    const url = `${config.host}/security/login`;
 
-    return this.axiosInstance.post<LoginResponse>(url, request.body, config);
+    return this.axiosInstance.post<LoginResponse>(url, request.body, {
+      headers: config.headers,
+    });
   }
 
   confirmAccount(
     request: UpdatePasswordRequest
   ): Promise<AxiosResponse<LoginResponse>> {
-    const url = `${this.config.host}/security/confirm-account`;
-    const config = axiosRequestConfig(request);
+    const config = this.config.merge(request as PortfolioRequest);
+    const url = `${config.host}/security/confirm-account`;
 
-    return this.axiosInstance.post<LoginResponse>(url, request.body, config);
+    return this.axiosInstance.post<LoginResponse>(url, request.body, {
+      headers: config.headers,
+    });
   }
 }

@@ -1,42 +1,55 @@
 import axios, { AxiosResponse } from "axios";
-import { ContactClient, CreateContactMessageRequest, Reason } from "../src";
+import {
+  ClientConfig,
+  ContactClient,
+  CreateContactMessageRequest,
+  Reason,
+} from "../src";
 
 jest.mock("axios");
 
 describe("message service", () => {
-  const config = {
+  const config: ClientConfig = {
     host: "123",
-  };
-
-  const axiosResponse: AxiosResponse = {
-    data: {
-      success: true,
-      meta: {},
-      data: {},
-    },
-    status: 201,
-    statusText: "Created",
-    config: {},
-    headers: {},
+    version: "v1.0",
+    jwt: "123.jwt.abc",
   };
 
   let axiosMock: any;
   let client: ContactClient;
 
-  beforeAll(() => {
+  beforeEach(() => {
     axiosMock = axios as jest.Mocked<typeof axios>;
-    axiosMock.post.mockImplementation(() => {
-      return axiosResponse;
-    });
-
     client = new ContactClient(config, axiosMock);
   });
 
+  afterEach(() => {
+    jest.resetAllMocks();
+  });
+
   it("should have expected config", () => {
-    expect(client.config).toBe(config);
+    expect(client.config.host).toBe(config.host);
+    expect(client.config.version).toBe(config.version);
+    expect(client.config.jwt).toBe(config.jwt);
   });
 
   it("should successfully create new contact message", async () => {
+    const expectedResponse: AxiosResponse = {
+      data: {
+        success: true,
+        meta: {},
+        data: {},
+      },
+      status: 201,
+      statusText: "Created",
+      config: {},
+      headers: {},
+    };
+
+    axiosMock.post.mockImplementation(() => {
+      return expectedResponse;
+    });
+
     const request: CreateContactMessageRequest = {
       body: {
         message:
@@ -52,8 +65,51 @@ describe("message service", () => {
 
     const response = await client.createMessage(request);
 
-    expect(response).toEqual(axiosResponse);
+    expect(response).toEqual(expectedResponse);
     expect(axiosMock.post).toHaveBeenCalledTimes(1);
-    // TODO: Enhance mocking to be able to test what the mock was called with.
+  });
+
+  it("should successfully retrieve list of contact messages", async () => {
+    const expectedResponse: AxiosResponse = {
+      data: {
+        success: true,
+        meta: {},
+        data: {
+          count: 1,
+          contactMessages: [
+            {
+              id: "id",
+              message: "Test message",
+              reason: Reason.Business,
+              archived: false,
+              responded: false,
+              sender: {
+                alias: "alias",
+                phone: "1234567890",
+                email: "test@email.com",
+                ip: "127.0.0.1",
+                userAgent: "Chrome",
+              },
+              readers: [],
+              timeCreated: new Date(),
+              timeUpdated: new Date(),
+            },
+          ],
+        },
+      },
+      status: 200,
+      statusText: "Ok",
+      config: {},
+      headers: {},
+    };
+
+    axiosMock.get.mockImplementation(() => {
+      return expectedResponse;
+    });
+
+    const response = await client.findMessages();
+
+    expect(response).toEqual(expectedResponse);
+    expect(axiosMock.get).toHaveBeenCalledTimes(1);
   });
 });

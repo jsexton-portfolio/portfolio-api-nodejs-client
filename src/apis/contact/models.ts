@@ -13,6 +13,11 @@ export interface ContactMessage extends Entity {
   lastUpdated: Date;
 }
 
+export interface ContactMessageCollection {
+  count: number;
+  contactMessages: ContactMessage[];
+}
+
 export enum Reason {
   // TODO: In future API releases, case will not matter
   Business = "business",

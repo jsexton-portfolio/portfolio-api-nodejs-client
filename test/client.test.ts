@@ -1,4 +1,9 @@
-import { portfolio, PortfolioClient } from "../src";
+import {
+  ClientConfig,
+  ClientConfigWrapper,
+  portfolio,
+  PortfolioClient,
+} from "../src";
 
 describe("portfolio client factory function", () => {
   it("should return portfolio client", () => {
@@ -20,7 +25,7 @@ describe("portfolio client factory function", () => {
 });
 
 describe("portfolio client", () => {
-  const config = {
+  const config: ClientConfig = {
     host: "123",
   };
 
@@ -40,5 +45,29 @@ describe("portfolio client", () => {
 
   it("should have expected config", () => {
     expect(client.config).toBe(config);
+  });
+});
+
+describe("client config wrapper", () => {
+  const config = {
+    host: "host",
+    jwt: "123.abc.jwt",
+    version: "v1.0",
+  };
+
+  let configWrapper: ClientConfigWrapper;
+
+  beforeAll(() => {
+    configWrapper = new ClientConfigWrapper(config);
+  });
+
+  it("should correctly attach jwt as bearer token header", () => {
+    const headers = configWrapper.headers;
+    expect(headers["Authorization"]).toEqual(`Bearer ${config.jwt}`);
+  });
+
+  it("should correctly attach version to custom header", () => {
+    const headers = configWrapper.headers;
+    expect(headers["X-PORTFOLIO-VERSION"]).toEqual(config.version);
   });
 });

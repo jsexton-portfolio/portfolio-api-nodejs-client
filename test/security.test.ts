@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from "axios";
-import { LoginRequest, SecurityClient } from "../src";
+import { LoginRequest, SecurityClient, UpdatePasswordRequest } from "../src";
 
 jest.mock("axios");
 
@@ -8,44 +8,48 @@ describe("security service", () => {
     host: "123",
   };
 
-  const axiosResponse: AxiosResponse = {
-    data: {
-      success: true,
-      meta: {
-        message: "Request completed successfully",
-        errorDetails: {},
-        schema: {},
-      },
-      data: {
-        idToken: "",
-        accessToken: "",
-        refereshToken: "",
-        tokenType: "",
-      },
-    },
-    status: 200,
-    statusText: "OK",
-    config: {},
-    headers: {},
-  };
-
   let axiosMock: any;
   let client: SecurityClient;
 
-  beforeAll(() => {
+  beforeEach(() => {
     axiosMock = axios as jest.Mocked<typeof axios>;
-    axiosMock.post.mockImplementation(() => {
-      return axiosResponse;
-    });
-
     client = new SecurityClient(config, axiosMock);
   });
 
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
+
   it("should have expected config", () => {
-    expect(client.config).toBe(config);
+    expect(client.config.host).toBe(config.host);
   });
 
   it("should successfully authenticate request with credentials", async () => {
+    const expectedResponse: AxiosResponse = {
+      data: {
+        success: true,
+        meta: {
+          message: "Request completed successfully",
+          errorDetails: {},
+          schema: {},
+        },
+        data: {
+          idToken: "",
+          accessToken: "",
+          refreshToken: "",
+          tokenType: "",
+        },
+      },
+      status: 200,
+      statusText: "OK",
+      config: {},
+      headers: {},
+    };
+
+    axiosMock.post.mockImplementation(() => {
+      return expectedResponse;
+    });
+
     const request: LoginRequest = {
       body: {
         username: "username",
@@ -55,8 +59,47 @@ describe("security service", () => {
 
     const response = await client.login(request);
 
-    expect(response).toEqual(axiosResponse);
+    expect(response).toEqual(expectedResponse);
     expect(axiosMock.post).toHaveBeenCalledTimes(1);
-    // TODO: Enhance mocking to be able to test what the mock was called with.
+  });
+
+  it("should successfully confirm account ", async () => {
+    const expectedResponse: AxiosResponse = {
+      data: {
+        success: true,
+        meta: {
+          message: "Request completed successfully",
+          errorDetails: {},
+          schema: {},
+        },
+        data: {
+          idToken: "",
+          accessToken: "",
+          refreshToken: "",
+          tokenType: "",
+        },
+      },
+      status: 200,
+      statusText: "OK",
+      config: {},
+      headers: {},
+    };
+
+    axiosMock.post.mockImplementation(() => {
+      return expectedResponse;
+    });
+
+    const request: UpdatePasswordRequest = {
+      body: {
+        username: "username",
+        oldPassword: "oldPasssword",
+        newPassword: "newPassword",
+      },
+    };
+
+    const response = await client.confirmAccount(request);
+
+    expect(response).toEqual(expectedResponse);
+    expect(axiosMock.post).toHaveBeenCalledTimes(1);
   });
 });
