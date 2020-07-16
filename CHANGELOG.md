@@ -1,6 +1,7 @@
 # 0.3.0
 
 - Contact client is now able to retrieve multiple contact messages
+  - Includes pagination and other query parameters
 - Contact client is now able to retrieve a specific contact message
 - Portfolio client can now be configured with an authentication token
 - Restructured request interface to be more fine grained

@@ -1,6 +1,7 @@
 import axios, { AxiosInstance, AxiosResponse } from "axios";
 import { BaseClient, ClientConfig } from "../../common/client";
 import {
+  PaginationQueryParameter,
   PortfolioRequest,
   RequestWithBody,
   RequestWithParameters,
@@ -27,7 +28,8 @@ export interface GetContactMessageRequest extends PortfolioRequest {
   id: string;
 }
 
-export interface GetContactMessageQueryParameters {
+export interface GetContactMessageQueryParameters
+  extends PaginationQueryParameter {
   reason?: Reason;
   archived?: boolean;
   responded?: boolean;

@@ -19,3 +19,8 @@ export interface RequestWithBody<T> extends PortfolioRequest {
 export interface CompletePortfolioRequest<B, Q>
   extends RequestWithBody<B>,
     RequestWithParameters<Q> {}
+
+export interface PaginationQueryParameter {
+  page?: number;
+  limit?: number;
+}
