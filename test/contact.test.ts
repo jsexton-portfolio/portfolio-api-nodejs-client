@@ -40,7 +40,7 @@ describe("message service", () => {
         meta: {},
         data: {},
       },
-      status: 201,
+      status: 202,
       statusText: "Created",
       config: {},
       headers: {},
