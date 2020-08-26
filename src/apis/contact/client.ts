@@ -10,6 +10,7 @@ import { PortfolioResponse } from "../../common/response";
 import {
   ContactMessage,
   ContactMessageCollection,
+  ContactMessageFormPublished,
   Reason,
   Sender,
 } from "./models";
@@ -41,6 +42,10 @@ export type GetContactMessagesRequest = RequestWithParameters<
 
 export type ContactMessageResponse = PortfolioResponse<ContactMessage>;
 
+export type ContactMessageCreatedResponse = PortfolioResponse<
+  ContactMessageFormPublished
+>;
+
 export type ContactMessagesResponse = PortfolioResponse<
   ContactMessageCollection
 >;
@@ -60,13 +65,17 @@ export class ContactClient extends BaseClient {
    */
   createMessage(
     request: CreateContactMessageRequest
-  ): Promise<AxiosResponse<ContactMessageResponse>> {
+  ): Promise<AxiosResponse<ContactMessageCreatedResponse>> {
     const config = this.config.merge(request as PortfolioRequest);
     const url = `${config.host}/contact/mail`;
 
-    return this.axiosInstance.post<ContactMessageResponse>(url, request.body, {
-      headers: config.headers,
-    });
+    return this.axiosInstance.post<ContactMessageCreatedResponse>(
+      url,
+      request.body,
+      {
+        headers: config.headers,
+      }
+    );
   }
 
   /**

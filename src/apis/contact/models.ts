@@ -18,6 +18,11 @@ export interface ContactMessageCollection {
   contactMessages: ContactMessage[];
 }
 
+export interface ContactMessageFormPublished {
+  contactMessageId: string;
+  snsMessageId: string;
+}
+
 export enum Reason {
   // TODO: In future API releases, case will not matter
   Business = "business",

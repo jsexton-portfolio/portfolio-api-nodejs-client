@@ -1,3 +1,7 @@
+
+# 0.4.0
+- Updated API to comply with contact message service v0.6.0
+
 # 0.3.0
 
 - Contact client is now able to retrieve multiple contact messages
