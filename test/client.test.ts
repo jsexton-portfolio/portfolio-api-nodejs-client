@@ -65,9 +65,4 @@ describe("client config wrapper", () => {
     const headers = configWrapper.headers;
     expect(headers["Authorization"]).toEqual(`Bearer ${config.jwt}`);
   });
-
-  it("should correctly attach version to custom header", () => {
-    const headers = configWrapper.headers;
-    expect(headers["X-PORTFOLIO-VERSION"]).toEqual(config.version);
-  });
 });

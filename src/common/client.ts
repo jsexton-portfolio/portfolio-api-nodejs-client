@@ -6,7 +6,6 @@ export type Headers = { [headerName: string]: any };
 export interface ClientConfig {
   host: string;
   jwt?: string;
-  version?: string;
 }
 
 export class ClientConfigWrapper {
@@ -27,7 +26,6 @@ export class ClientConfigWrapper {
   get headers(): Headers {
     return {
       Authorization: `Bearer ${this.config.jwt}`,
-      "X-PORTFOLIO-VERSION": this.config.version,
     };
   }
 
@@ -37,10 +35,6 @@ export class ClientConfigWrapper {
 
   get jwt(): string | undefined {
     return this.config.jwt;
-  }
-
-  get version(): string | undefined {
-    return this.config.version;
   }
 }
 

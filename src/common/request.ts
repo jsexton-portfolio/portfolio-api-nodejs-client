@@ -5,7 +5,6 @@
  */
 export interface PortfolioRequest {
   jwt?: string;
-  version?: string;
 }
 
 export interface RequestWithParameters<T> extends PortfolioRequest {

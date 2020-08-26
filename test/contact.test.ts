@@ -11,7 +11,6 @@ jest.mock("axios");
 describe("message service", () => {
   const config: ClientConfig = {
     host: "123",
-    version: "v1.0",
     jwt: "123.jwt.abc",
   };
 
@@ -29,7 +28,6 @@ describe("message service", () => {
 
   it("should have expected config", () => {
     expect(client.config.host).toBe(config.host);
-    expect(client.config.version).toBe(config.version);
     expect(client.config.jwt).toBe(config.jwt);
   });
 
