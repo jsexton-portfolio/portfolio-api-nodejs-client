@@ -17,6 +17,6 @@ export interface ErrorDetail {
 }
 
 export interface PaginationDetails {
-  page: number;
-  limit: number;
+  page?: number;
+  limit?: number;
 }

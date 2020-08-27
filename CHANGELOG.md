@@ -1,3 +1,8 @@
+# 0.5.0
+
+- Added capability to interface with forgot password functionality
+- Added capability to interface with refresh token functionality
+
 # 0.4.1
 
 - Removed api version header
